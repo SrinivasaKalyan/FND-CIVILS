@@ -1,8 +1,18 @@
+
 import streamlit as st
-import pyperclip
+import streamlit.components.v1 as components
 import pandas as pd
 
 st.title("FND CIVILS")
+
+# ✅ Function to create copy button
+def copy_button(text, key):
+    components.html(f"""
+        <button onclick="navigator.clipboard.writeText('{text}')"
+                style="padding:6px 12px; border-radius:8px; background:#4CAF50; color:white; border:none; cursor:pointer; margin-top:5px;">
+            📋 Copy
+        </button>
+    """, height=45)
 
 # Sidebar
 option = st.sidebar.radio(
@@ -63,10 +73,9 @@ elif option == "Job Notes":
     if st.session_state.data:
         st.subheader("Job Notes (Copy Data)")
         for idx, (key, row) in enumerate(st.session_state.data.items(), start=1):
-            if st.button(f"{row['wp']}", key=f"copybtn_{idx}"):
-                text_to_copy = f"{row['wp']}: {row['structure'].upper()} {row['address'].upper()} @GRID:{row['grid']}"
-                pyperclip.copy(text_to_copy)
-                st.success(f"Copied {row['wp']} to clipboard!")
+            st.write(f"**{row['wp']}**")
+            text_to_copy = f"{row['wp']}: {row['structure'].upper()} {row['address'].upper()} @GRID:{row['grid']}"
+            copy_button(text_to_copy, key=f"copybtn_{idx}")
     else:
         st.warning("No data available. Please add entries in JPP Data first.")
 
@@ -77,10 +86,9 @@ elif option == "Ordinance Survey/Duct Plan":
     if st.session_state.data:
         st.subheader("Ordinance Survey/Duct Plan (Copy Data)")
         for idx, (key, row) in enumerate(st.session_state.data.items(), start=1):
-            if st.button(f"{row['wp']}", key=f"copybtn2_{idx}"):
-                text_to_copy = f"{row['wp']}: {row['structure'].upper()} \n@GRID:{row['grid']}"
-                pyperclip.copy(text_to_copy)
-                st.success(f"Copied {row['wp']} to clipboard!")
+            st.write(f"**{row['wp']}**")
+            text_to_copy = f"{row['wp']}: {row['structure'].upper()} \\n @GRID:{row['grid']}"
+            copy_button(text_to_copy, key=f"copybtn_{idx}")
     else:
         st.warning("No data available. Please add entries in JPP Data first.")
 
