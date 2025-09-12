@@ -17,7 +17,7 @@ def copy_button(text, key):
 # Sidebar
 option = st.sidebar.radio(
     "Choose an option:",
-    ["JPP Data", "Job Notes", "Ordinance Survey/Duct Plan", "TMA Page"]
+    ["JPP Data", "Job Notes", "Callouts", "TMA Page"]
 )
 
 # Initialize session state
@@ -82,7 +82,7 @@ elif option == "Job Notes":
 # -------------------------
 # ORDINANCE SURVEY / DUCT PLAN
 # -------------------------
-elif option == "Ordinance Survey/Duct Plan":
+elif option == "Callouts":
     if st.session_state.data:
         st.subheader("Ordinance Survey/Duct Plan (Copy Data)")
         for idx, (key, row) in enumerate(st.session_state.data.items(), start=1):
@@ -119,4 +119,5 @@ elif option == "TMA Page":
 
     st.write("Final Table:")
     st.dataframe(edited_df, use_container_width=True)
+
 
