@@ -103,7 +103,7 @@ elif option == "TMA Page":
 
     # Create an empty table with 20 rows
     if "tma_table" not in st.session_state:
-        st.session_state.tma_table = pd.DataFrame({"Grid": ["" for _ in range(20)]})
+        st.session_state.tma_table = pd.DataFrame({"Grid": ["" for _ in range(20)], "Address": ["" for _ in range(20)]})
 
     # Let user edit the table
     edited_df = st.data_editor(st.session_state.tma_table, num_rows="fixed")
@@ -119,5 +119,6 @@ elif option == "TMA Page":
 
     st.write("Final Table:")
     st.dataframe(edited_df, use_container_width=True)
+
 
 
